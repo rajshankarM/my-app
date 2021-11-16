@@ -36,7 +36,7 @@ export default function App() {
 
   ]
 
-  const movies = [
+  const INITIAL_MOVIES = [
 
     {
       name: "Avangers",
@@ -89,10 +89,50 @@ export default function App() {
     },
 
   ]
+
+  const [name, setName] = useState("")
+  const [poster, setPoster] = useState("")
+  const [rating, setRating] = useState("")
+  const [summary, setSummary] = useState("")
+
+  const [movies, setMovies] = useState(INITIAL_MOVIES)
+
+  const addMovie = () => {
+    console.log("Adding movies...", name,
+      poster,
+      rating,
+      summary);
+    const newMovie = {
+      name,
+      poster,
+      rating,
+      summary,
+    };
+    console.log(newMovie);
+
+    setMovies([...movies, newMovie]);
+
+  };
+
   return (
     <div className="App">
+      <div>
+        <input value={name}
+          onChange={(event) => setName(event.target.value)}
+          placeholder="Enter movie a name" />
+        <input value={poster}
+          onChange={(event) => setPoster(event.target.value)}
+          placeholder="Enter movie a poster" />
+        <input value={rating}
+          onChange={(event) => setRating(event.target.value)}
+          placeholder="Enter movie a rating" />
+        <input value={summary}
+          onChange={(event) => setSummary(event.target.value)}
+          placeholder="Enter movie a summary" />
 
-      {/* <MovieList movies={movies} /> */}
+        <button onClick={addMovie}>Add movie</button>
+      </div>
+      <MovieList movies={movies} />
       <AddColor />
     </div>
   );
