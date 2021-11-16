@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Counter } from './App';
+import { Counter } from "./Counter";
 
 
 export function Movie({ name, rating, summary, poster }) {

@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
 import { MovieList } from './MovieList';
-
-
+import { useState } from "react"
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 export default function App() {
 
@@ -92,30 +92,44 @@ export default function App() {
   return (
     <div className="App">
 
-      <MovieList movies={movies} />
-      {/* <Counter /> */}
-    </div>
-  );
-}
-// impore {useState} from 'react';
-export function Counter() {
-  //  let like = 10;
-  const [like, setLike] = useState(0);
-  const [dislike, setdisLike] = useState(0);
-  return (
-    <div className="counter-container">
-      <button className="likes-dislikes" onClick={() => setLike(like + 1)}>  👍{like} </button>
-      <button className="likes-dislikes" onClick={() => setdisLike(dislike + 1)}>  👎{dislike} </button>
-
+      {/* <MovieList movies={movies} /> */}
+      <AddColor />
     </div>
   );
 }
 
-function Msg({ name, pic }) {
-  return (
-    <div>
-      <img className="user-pic" src={pic} alt={name} />
-      <h1 className="user-name"> {name} !!!</h1>
+function AddColor() {
+  const [color, setColor] = useState("orange")
+  const styles = { backgroundColor: color }
+  // const colors = ["teal", "orange", "lavender"]
+
+  const [colors, setColors] = useState(["teal", "orange", "lavender"])
+  return (<div>
+    <div className="add-color-form">
+      <TextField value={color}
+        onChange={(event) => setColor(event.target.value)}
+        style={styles}
+        label="Enter a Color" variant="standard" />
+
+      <Button onClick={() => setColors([...colors, color])}
+        variant="outlined">
+        Add Color
+      </Button>
     </div>
+
+    {colors.map((clr, index) => (
+      <ColorBox key={index} color={clr} />))}
+
+  </div>
   );
+}
+
+function ColorBox({ color }) {
+  const styles = {
+    backgroundColor: color,
+    height: "25px",
+    width: "250px",
+    marginTop: "10px"
+  }
+  return <div style={styles}></div>
 }
